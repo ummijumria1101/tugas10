@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Tugas 10</title>
+</head>
+<body>
+    <div class="flex">
+        <div class="w-1/3 text-center m-5 bg-orange-100 p-4 h-screen rounded-md">
+            <h1>Tugas 1</h1>
+            <p class="text-justify p-5">Buatlah sebuah fungsi JavaScript yang menerima sebuah string dan mengembalikan string baru yang merupakan hasil penggabungan setiap kata dalam string tersebut dengan karakter "@" di antara setiap huruf</p>
+            <input type="text" id="inputString" placeholder="Masukkan teks">
+            <button onclick="gabungKata()" class="bg-orange-300 p-2 rounded-md">Gabung</button>
+            <div class="border-2 rounded-md h-32 mt-3">
+                <p class="font-semibold text-lg">Hasil</p>
+                <p id="result" class="p-2 h-auto"></p>
+            </div>
+            
+
+        </div>
+
+        <div class="w-1/3 text-center m-5 bg-orange-100 p-4 h-screen rounded-md">
+            <h1>Tugas 2</h1>
+            <p class="text-justify p-5">Buatlah sebuah fungsi JavaScript yang menerima sebuah array objek dan mengembalikan array baru yang berisi objek-objek yang memiliki properti "name" unik, diurutkan berdasarkan nama secara alfabetis.
+            </p>
+            <button onclick="filterAndSort()"  class="bg-orange-300 p-2 px-5 rounded-md">Sort</button>
+            <div class="border-2 rounded-md h-1/3 mt-3">
+                <p class="font-semibold text-lg">Hasil</p>
+                <ul id="result2" class="p-2 h-auto"></ul>
+            </div>
+        </div>
+
+        <div class="w-1/3 text-center m-5 bg-orange-100 p-4 h-screen rounded-md">
+            <h1>Tugas 3</h1>
+            <p class="text-justify p-5">Buatlah sebuah fungsi JavaScript yang menerima sebuah array angka dan mengembalikan array baru yang berisi angka-angka yang merupakan hasil penjumlahan dari angka sebelumnya dalam array.
+            </p>
+            <input type="text" id="input-angka" placeholder="pisah angka dengan koma">
+            <button onclick="hitungPenjumlahan()" class="bg-orange-300 p-2 rounded-md">Hitung</button>
+            <div class="border-2 rounded-md h-32 mt-3">
+                <p class="font-semibold text-lg">Hasil</p>
+                <p id="hasil" class="p-2 h-auto"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+            function gabungKata() {
+            var input = document.getElementById('inputString').value;
+            var result='';
+            var at = "@";
+            result = input.split("").join(at);
+            document.getElementById('result').innerHTML = result;
+            }
+        
+            function filterAndSort() {
+                const objects = [
+                    { name: 'John', Age: 25 },
+                    { name: 'Jane', Age: 30 },
+                    { name: 'John', Age: 35 },
+                    { name: 'Alice', Age: 28 }
+                ];
+
+                var sort = objects.sort(function(a, b){
+                    if(a.name < b.name){
+                        return -1;
+                    }
+                    if(a.name > a.name){
+                        return 1;
+                    }
+                    return 0;
+                });
+                var hasilsort = document.getElementById("result2");
+                hasilsort.innerHTML = '';
+                for (var i = 0; i < sort.length; i++) {
+                    var obj = sort[i];
+                    var li = document.createElement('li');
+                    li.textContent = obj.name + ' - ' + obj.Age;
+                    hasilsort.appendChild(li);
+                }
+
+            }
+            
+            function hitungPenjumlahan() {
+                var inputAngka = document.getElementById('input-angka').value;
+                var angka = inputAngka.split(',').map(function(item) {
+                    return parseInt(item.trim(), 10);
+                });
+                var hasilnya = [];
+
+                for (var i = 0; i < angka.length; i++) {
+                    if (i === 0) {
+                    hasilnya.push(angka[i]);
+                    } else {
+                    var penjumlahan = angka[i] + hasilnya[i - 1];
+                    hasilnya.push(penjumlahan);
+                    }
+                }
+                document.getElementById('hasil').textContent = hasilnya.join(', ');
+            }
+            
+    </script>
+</body>
+</html>
